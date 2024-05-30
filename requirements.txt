@@ -3,3 +3,4 @@ Flask-WTF==0.15.1
 Flask-SQLAlchemy==2.5.1
 Werkzeug==2.0.1
 sendgrid
+dotenv
