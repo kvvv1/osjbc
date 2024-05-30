@@ -1,0 +1,157 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    padding-top: 70px; /* Adicione um padding-top para garantir que o conteúdo não encoste no menu */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto; /* Remova a margem superior grande */
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid red;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+
+
+.navbar a {
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: red;
+    border-radius: 4px;
+}
+
+h1, h3 {
+    color: #333;
+    text-align: center;
+}
+
+button, .btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+button:hover, .btn:hover {
+    background-color: red;
+}
+
+.form-group, .form-check {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-check-label {
+    margin-left: 5px;
+}
+
+.list-group {
+    list-style: none;
+    padding: 0;
+}
+
+.list-group-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+.badge-success {
+    background-color: green;
+    color: white;
+}
+
+.badge-primary {
+    background-color: blue;
+    color: white;
+}
+
+.badge-danger {
+    background-color: red;
+    color: white;
+}
+
+.nav-pills .nav-link {
+    color: #dc3545; /* cor vermelha */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #dc3545; /* cor vermelha */
+}
+
+.nav-pills .nav-link:hover {
+    color: #fff;
+    background-color: #dc3545; /* cor vermelha */
+}
+
+
+
+/* Estilo para o pop-up */
+.flash-popup {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid red;
+    z-index: 1001;
+    display: none;
+}
+
+.flash-popup.show {
+    display: block;
+}
+
+
+.bemvindo {
+    color:white;
+}

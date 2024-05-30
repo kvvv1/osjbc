@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card mt-4">
+    <div class="card-header">
+      <h1 class="card-title">Ordem de Serviço</h1>
+    </div>
+    <div class="card-body">
+      <div class="d-flex justify-content-around mb-3">
+        <div class="text-center">
+          <i class="fas fa-user fa-2x"></i>
+          <p><strong>Criado por:</strong> {{ creator['username'] }}</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-calendar-alt fa-2x"></i>
+          <p><strong>Criado em:</strong> {{ order['created_at'] }}</p>
+        </div>
+        <div class="text-center">
+          <i class="fas fa-info-circle fa-2x"></i>
+          <p><strong>Status:</strong> {{ order['status'] }}</p>
+        </div>
+      </div>
+      
+      <h3 class="mt-4">Visualizar PDF</h3>
+      <div class="d-flex justify-content-center">
+        <iframe src="{{ url_for('uploaded_file', filename=order['file_path']) }}" style="width: 210mm; height: 297mm;"></iframe>
+      </div>
+      
+      <h3 class="mt-4">Setores Responsáveis</h3>
+      <ul class="list-group">
+        {% for sector in sectors %}
+          <li class="list-group-item">
+            <strong>{{ sector.name }}</strong>
+            <ul class="list-group">
+              {% for user in sector.users %}
+                <li class="list-group-item">
+                  {{ user.username }}
+                  <div>
+                    {% if user.accepted_by and not user.viewed %}
+                      <span class="badge badge-danger">Recusado por {{ user.accepted_by }} em {{ user.accepted_at }}</span>
+                    {% elif user.viewed %}
+                      <span class="badge badge-success">Aceito em {{ user.accepted_at }}</span>
+                    {% elif user.status == "RECUSADO" %}
+                      <span class="badge badge-danger">RECUSADO em {{ user.accepted_at }}</span>
+                    {% endif %}
+                    {% if user.user_id == current_user.id and not user.viewed %}
+                      <form method="POST" action="{{ url_for('accept_os', sector_id=user.sector_id) }}" style="display: inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Aceitar</button>
+                      </form>
+                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#returnModal" data-sector-id="{{ user.sector_id }}">Recusar</button>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
+      
+      {% if is_creator %}
+        <h3 class="mt-4">Observações dos Setores</h3>
+        <ul class="list-group">
+          {% for observation in observations %}
+            <li class="list-group-item">
+              <strong>{{ observation.sector }}:</strong> {{ observation.observation }} <small class="text-muted"> ({{ observation.responsible }} / {{ observation.created_at }})</small>
+            </li>
+          {% endfor %}
+        </ul>
+        <a href="{{ url_for('edit_os', os_id=order['id']) }}" class="btn btn-warning mt-3">Editar</a>
+        <form method="POST" action="{{ url_for('resend_os', os_id=order['id']) }}" style="display: inline;">
+          <button type="submit" class="btn btn-primary mt-3">Reenviar</button>
+        </form>
+      {% endif %}
+      <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
+  </div>
+
+  <!-- Modal de Retorno -->
+  <div class="modal fade" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="returnModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="returnModalLabel">Recusar para o Criador</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="returnForm" method="POST">
+            <div class="form-group">
+              <label for="observation">Observação</label>
+              <textarea class="form-control" id="observation" name="observation" maxlength="150" required></textarea>
+            </div>
+            <input type="hidden" name="sector_id" id="sectorInput">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('#returnModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var sectorId = button.data('sector-id')
+      var form = document.getElementById('returnForm')
+      form.action = '/return/' + sectorId
+      document.getElementById('sectorInput').value = sectorId;
+    })
+  </script>
+{% endblock %}

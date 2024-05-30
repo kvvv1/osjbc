@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1 class="text-center">Editar Informações do Usuário</h1>
+  <form method="POST" class="form-horizontal">
+    <div class="form-group">
+      <label for="username" class="form-control-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" value="{{ user[1] }}" required>
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-control-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ user[3] }}" required>
+    </div>
+    <div class="form-group">
+      <label for="phone" class="form-control-label">Phone</label>
+      <input type="text" class="form-control" id="phone" name="phone" value="{{ user[4] }}" required>
+    </div>
+    <div class="form-group">
+      <label for="sector" class="form-control-label">Sector</label>
+      <select class="form-control" id="sector" name="sector" required>
+        <option value="RH" {% if user[5] == 'RH' %}selected{% endif %}>RH</option>
+        <option value="SEMST" {% if user[5] == 'SEMST' %}selected{% endif %}>SEMST</option>
+        <option value="COMERCIAL" {% if user[5] == 'COMERCIAL' %}selected{% endif %}>COMERCIAL</option>
+        <option value="FINANCEIRO" {% if user[5] == 'FINANCEIRO' %}selected{% endif %}>FINANCEIRO</option>
+        <option value="SUPRIMENTOS" {% if user[5] == 'SUPRIMENTOS' %}selected{% endif %}>SUPRIMENTOS</option>
+        <option value="OPERACIONAL" {% if user[5] == 'OPERACIONAL' %}selected{% endif %}>OPERACIONAL</option>
+        <option value="DP" {% if user[5] == 'DP' %}selected{% endif %}>DP</option>
+        <option value="RECEPÇÃO" {% if user[5] == 'RECEPÇÃO' %}selected{% endif %}>RECEPÇÃO</option>
+        <option value="TI" {% if user[5] == 'TI' %}selected{% endif %}>TI</option>
+      </select>
+    </div>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="{{ url_for('manage') }}" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

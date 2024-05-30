@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Gerenciamento de Setores e Usuários</h1>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-add-user-tab" data-toggle="pill" href="#v-pills-add-user" role="tab" aria-controls="v-pills-add-user" aria-selected="true">Adicionar Usuário</a>
+          <a class="nav-link" id="v-pills-view-users-tab" data-toggle="pill" href="#v-pills-view-users" role="tab" aria-controls="v-pills-view-users" aria-selected="false">Ver Usuários</a>
+          <a class="nav-link" id="v-pills-view-sectors-tab" data-toggle="pill" href="#v-pills-view-sectors" role="tab" aria-controls="v-pills-view-sectors" aria-selected="false">Ver Usuários por Setor</a>
+          <a class="nav-link" id="v-pills-clean-data-tab" data-toggle="pill" href="#v-pills-clean-data" role="tab" aria-controls="v-pills-clean-data" aria-selected="false">Backup e Limpeza de Dados</a>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-add-user" role="tabpanel" aria-labelledby="v-pills-add-user-tab">
+            <h2 class="mb-4">Adicionar Usuário</h2>
+            <form method="POST">
+              <div class="form-group">
+                <label for="username">Nome de Usuário</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefone</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="sector">Setor</label>
+                <select class="form-control" id="sector" name="sector" required>
+                  <option value="RH">RH</option>
+                  <option value="SEMST">SEMST</option>
+                  <option value="COMERCIAL">COMERCIAL</option>
+                  <option value="FINANCEIRO">FINANCEIRO</option>
+                  <option value="SUPRIMENTOS">SUPRIMENTOS</option>
+                  <option value="OPERACIONAL">OPERACIONAL</option>
+                  <option value="DP">DP</option>
+                  <option value="RECEPÇÃO">RECEPÇÃO</option>
+                  <option value="TI">TI</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-danger">Adicionar Usuário</button>
+            </form>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-view-users" role="tabpanel" aria-labelledby="v-pills-view-users-tab">
+            <h2 class="mb-4">Usuários Existentes</h2>
+            <ul class="list-group">
+              {% for user in users %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a data-toggle="collapse" href="#user-details-{{ user[0] }}" role="button" aria-expanded="false" aria-controls="user-details-{{ user[0] }}">
+                    {{ user[1] }} - {{ user[5] }}
+                  </a>
+                  <div>
+                    <a href="{{ url_for('edit_user', user_id=user[0]) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <form method="POST" action="{{ url_for('delete_user', user_id=user[0]) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+                      <button type="submit" class="btn btn-danger btn-sm">Remover</button>
+                    </form>
+                  </div>
+                  <div class="collapse" id="user-details-{{ user[0] }}">
+                    <div class="card card-body">
+                      <p><strong>Email:</strong> {{ user[3] }}</p>
+                      <p><strong>Telefone:</strong> {{ user[4] }}</p>
+                      <p><strong>Setor:</strong> {{ user[5] }}</p>
+                    </div>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-view-sectors" role="tabpanel" aria-labelledby="v-pills-view-sectors-tab">
+            <h2 class="mb-4">Usuários por Setor</h2>
+            <div class="accordion" id="sectorAccordion">
+              {% for sector in sectors %}
+                <div class="card">
+                  <div class="card-header" id="heading-{{ sector.name }}">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link text-danger" type="button" data-toggle="collapse" data-target="#collapse-{{ sector.name }}" aria-expanded="true" aria-controls="collapse-{{ sector.name }}">
+                        {{ sector.name }}
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapse-{{ sector.name }}" class="collapse" aria-labelledby="heading-{{ sector.name }}" data-parent="#sectorAccordion">
+                    <div class="card-body">
+                      <ul class="list-group">
+                        {% for user in sector.users %}
+                          <li class="list-group-item">{{ user.username }}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-clean-data" role="tabpanel" aria-labelledby="v-pills-clean-data-tab">
+            <h2 class="mb-4">Limpar Dados</h2>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmCleanModal">Limpar Ordens de Serviço</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="modal fade" id="confirmCleanModal" tabindex="-1" role="dialog" aria-labelledby="confirmCleanModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmCleanModalLabel">Confirmar Limpeza de Dados</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Tem certeza de que deseja limpar todas as ordens de serviço? Um backup será criado antes de prosseguir.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <form method="POST" action="{{ url_for('clear_os') }}">
+            <button type="submit" class="btn btn-danger">Confirmar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

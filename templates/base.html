@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title if title else "App" }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #ffffff;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+        .navbar .navbar-left,
+        .navbar .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .navbar-left {
+            flex: 1;
+            justify-content: flex-start;
+        }
+        .navbar .navbar-right {
+            flex: 1;
+            justify-content: flex-end;
+        }
+        .navbar .menu-item {
+            margin-left: 15px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .navbar .menu-item:hover {
+            background-color: red;
+            border-radius: 4px;
+        }
+        .logo-container {
+            position: absolute;
+            top: 100%; 
+            left: 52%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: auto;
+        }
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            width: 150px; /* Largura fixa do contorno */
+            height: 70px; /* Altura fixa do contorno */
+            border: 5px solid red;
+            border-top: none;
+            border-bottom-left-radius: 75px;
+            border-bottom-right-radius: 75px;
+            top: 56px; /* Ajuste esta propriedade para abaixar ou levantar o contorno */
+            left: -6%;
+            background-color: #343a40;
+            z-index: -1;
+        }
+        .logo {
+            position: relative;
+            left: 8px;
+            width: 60%;
+
+        }
+        .container {
+            margin-top: 70px;
+        }
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    {% if request.endpoint != 'login' %}
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('index') }}" class="menu-item">Home</a>
+            {% if current_user.is_authenticated %}
+                {% if current_user.sector in ['COMERCIAL', 'ADMIN'] %}
+                    <a href="{{ url_for('create_os') }}" class="menu-item">Criar OS</a>
+                {% endif %}
+                <a href="{{ url_for('history') }}" class="menu-item">Histórico</a>
+                {% if current_user.username == 'kaike.vittor' %}
+                    <a href="{{ url_for('manage') }}" class="menu-item">Gerenciamento</a>
+                {% endif %}
+            {% else %}
+                <a href="{{ url_for('login') }}" class="menu-item">Login</a>
+            {% endif %}
+        </div>
+        <div class="logo-container">
+            <img src="https://jbconservadora.com.br/wp-content/uploads/2020/09/logo-final-jb.png" alt="JB Conservadora | Portaria Social | Terceirização | BH-MG" class="logo">
+        </div>
+        <div class="navbar-right">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('notifications') }}" class="menu-item mr-3">
+                    <i class="fas fa-bell"></i> Notificações
+                    {% if g.unread_notifications_count > 0 %}
+                        <span class="badge badge-danger">{{ g.unread_notifications_count }}</span>
+                    {% endif %}
+                </a>
+                <a class="menu-item">{{ current_user.username }}</a>
+                <a href="{{ url_for('logout') }}" class="menu-item">Logout</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    <div class="container mt-5">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="flash-popup" class="flash-popup"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const flashPopup = document.getElementById('flash-popup');
+            const flashMessage = "{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}";
+            if (flashMessage) {
+                flashPopup.textContent = flashMessage;
+                flashPopup.classList.add('show');
+                setTimeout(() => {
+                    flashPopup.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

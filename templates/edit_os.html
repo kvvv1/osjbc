@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card mt-4">
+    <div class="card-header">
+      <h1 class="card-title">Editar Ordem de Serviço</h1>
+    </div>
+    <div class="card-body">
+      <form method="POST" action="{{ url_for('edit_os', os_id=order['id']) }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          {{ form.name.label }}<br>
+          {{ form.name(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.file.label }}<br>
+          {{ form.file(class="form-control-file") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

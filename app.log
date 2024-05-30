@@ -1,0 +1,11 @@
+2024-05-27 22:09:50,465 INFO:App startup
+2024-05-27 22:09:50,493 WARNING: * Debugger is active!
+2024-05-27 22:09:50,497 INFO: * Debugger PIN: 706-386-969
+2024-05-27 22:09:50,711 INFO: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2024-05-27 22:09:52,077 INFO:127.0.0.1 - - [27/May/2024 22:09:52] "[33mGET /test_reminder HTTP/1.1[0m" 404 -
+2024-05-27 22:09:53,453 INFO:127.0.0.1 - - [27/May/2024 22:09:53] "[33mGET /test_reminder HTTP/1.1[0m" 404 -
+2024-05-27 22:09:54,345 INFO:127.0.0.1 - - [27/May/2024 22:09:54] "GET / HTTP/1.1" 200 -
+2024-05-27 22:09:54,493 INFO:127.0.0.1 - - [27/May/2024 22:09:54] "GET /static/images/logo.png HTTP/1.1" 200 -
+2024-05-27 22:09:54,495 INFO:127.0.0.1 - - [27/May/2024 22:09:54] "GET /static/style.css HTTP/1.1" 200 -
+2024-05-27 22:10:32,107 INFO:127.0.0.1 - - [27/May/2024 22:10:32] "[33mGET /test_reminder HTTP/1.1[0m" 404 -
+2024-05-27 22:10:40,537 INFO: * Detected change in 'c:\\Users\\kaike\\Desktop\\PROGRAMA - OS\\tasks.py', reloading

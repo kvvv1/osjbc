@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-center my-4">Histórico de Ordens de Serviço</h1>
+
+<form method="GET" action="{{ url_for('history') }}" class="form-inline justify-content-center">
+    <div class="form-group mx-2">
+        <label for="search" class="sr-only">Buscar por Nome</label>
+        <input type="text" class="form-control" id="search" name="search" placeholder="Digite o nome da OS...">
+    </div>
+    <div class="form-group mx-2">
+        <label for="filter_by_creator" class="sr-only">Filtrar por Criador</label>
+        <input type="text" class="form-control" id="filter_by_creator" name="filter_by_creator" placeholder="Criador">
+    </div>
+    <div class="form-group mx-2">
+        <label for="filter_year" class="sr-only">Ano</label>
+        <select class="form-control" id="filter_year" name="filter_year">
+            <option value="">Ano</option>
+            {% for year in range(2020, 2025) %}
+                <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mx-2">
+        <label for="filter_month" class="sr-only">Mês</label>
+        <select class="form-control" id="filter_month" name="filter_month">
+            <option value="">Mês</option>
+            {% for month in range(1, 13) %}
+                <option value="{{ month }}">{{ month }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mx-2">Filtrar</button>
+</form>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Nome da OS</th>
+            <th>Criador</th>
+            <th>Data de Criação</th>
+            <th>Setores</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order['name'] }}</td>
+            <td>{{ order['username'] }}</td>
+            <td>{{ order['created_at'] }}</td>
+            <td>{{ order['sectors'] }}</td>
+            <td>
+                <a href="{{ url_for('view_os', os_id=order['id']) }}" class="btn btn-secondary btn-sm">Ver Detalhes</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
