@@ -1,18 +1,18 @@
+import os
 import shutil
+import sqlite3
+from datetime import datetime, timedelta
+import pytz
+import base64
+import logging
+from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory, g
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from datetime import datetime
-import pytz
-import os
-import sqlite3
-from forms import LoginForm, RegisterForm, OSForm, EditOSForm
 import sendgrid
 from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition
-import base64
-import logging
-from logging.handlers import RotatingFileHandler
+from forms import LoginForm, RegisterForm, OSForm, EditOSForm
 from celery_config import make_celery
 
 def get_current_brasilia_time():
@@ -55,6 +55,7 @@ def create_tables():
             user_id INTEGER,
             accepted_by TEXT,
             accepted_at TEXT,
+            status TEXT DEFAULT 'PENDENTE',
             FOREIGN KEY(os_id) REFERENCES os(id),
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
@@ -224,8 +225,6 @@ def create_app():
         else:
             g.unread_notifications_count = 0
 
-    # Rotas e demais funções aqui...
-
     @app.route('/')
     @login_required
     def index():
@@ -300,7 +299,7 @@ def create_app():
                 user_obj.email = user[3]
                 user_obj.phone = user[4]
                 user_obj.sector = user[5]
-                login_user(user_obj)
+                login_user(user_obj, remember=form.remember_me.data)
                 return redirect(url_for('index'))
             flash('Login inválido. Verifique seu usuário e senha.')
         return render_template('login.html', form=form)
@@ -601,7 +600,7 @@ def create_app():
             c.execute('''
                 INSERT INTO observations (os_id, sector, observation, responsible, created_at)
                 VALUES (?, ?, ?, ?, ?)
-            ''', (os_id, sector_name, observation, responsible, created_at))
+            ''', (os_id, sector_name, 'Recusa: ' + observation, responsible, created_at))
 
             # Atualizar o status do setor para recusado
             c.execute('UPDATE sector SET status = "RECUSADO", viewed = 0, accepted_by = ?, accepted_at = ? WHERE id = ?', (responsible, created_at, sector_id))
@@ -641,6 +640,58 @@ def create_app():
             conn.close()
 
         flash('Observação enviada ao criador da OS.')
+        return redirect(url_for('view_os', os_id=os_id))
+
+    @app.route('/add_observation/<int:os_id>', methods=['POST'])
+    @login_required
+    def add_observation(os_id):
+        observation = request.form.get('observation')
+        sector = current_user.sector
+        responsible = current_user.username
+        created_at = get_current_brasilia_time()
+
+        conn = sqlite3.connect('site.db')
+        c = conn.cursor()
+
+        try:
+            # Inserir observação
+            c.execute('''
+                INSERT INTO observations (os_id, sector, observation, responsible, created_at)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (os_id, sector, observation, responsible, created_at))
+
+            # Obter informações do criador da OS
+            c.execute('SELECT creator_id FROM os WHERE id = ?', (os_id,))
+            creator_id = c.fetchone()[0]
+            c.execute('SELECT email FROM users WHERE id = ?', (creator_id,))
+            creator_email = c.fetchone()[0]
+            c.execute('SELECT name FROM os WHERE id = ?', (os_id,))
+            os_name = c.fetchone()[0]
+
+            conn.commit()
+            conn.close()
+
+            # Enviar e-mail de observação para o criador da OS
+            subject = 'Nova Observação na OS'
+            message = f'A Ordem de Serviço <strong>{os_name}</strong> recebeu uma nova observação do setor <strong>{sector}</strong>: {observation}.'
+            send_email_notification(creator_email, subject, message, os_id)
+
+            # Adicionar notificação para o criador da OS
+            conn = sqlite3.connect('site.db')
+            c = conn.cursor()
+            c.execute('''
+                INSERT INTO notifications (user_id, message, created_at)
+                VALUES (?, ?, ?)
+            ''', (creator_id, f'Nova observação na OS {os_name}: {observation}', created_at))
+            conn.commit()
+            conn.close()
+
+        except Exception as e:
+            print(f"Error: {e}")
+            flash('Ocorreu um erro ao adicionar a observação. Tente novamente.')
+            conn.close()
+
+        flash('Observação adicionada com sucesso.')
         return redirect(url_for('view_os', os_id=os_id))
 
     @app.route('/notifications')
@@ -723,6 +774,11 @@ def create_app():
             query += ' AND strftime("%m", os.created_at) = ?'
             params.append(f'{int(filter_month):02d}')  # Garantir que o mês tenha dois dígitos
 
+        filter_status = request.args.get('filter_status')
+        if filter_status:
+            query += ' AND os.status = ?'
+            params.append(filter_status)
+
         query += ' GROUP BY os.id, os.name, os.created_at, users.username'
 
         c.execute(query, params)
@@ -733,7 +789,7 @@ def create_app():
 
         conn.close()
 
-    # Converte os resultados em uma lista de dicionários
+        # Converte os resultados em uma lista de dicionários
         orders = [dict(order) for order in orders]
 
         return render_template('history.html', orders=orders, creators=creators)
@@ -779,29 +835,6 @@ def create_app():
         conn.close()
         flash('OS reenviada e notificação enviada a todos os setores selecionados. Todos devem aceitar novamente.')
         return redirect(url_for('view_os', os_id=os_id))
-    
-    @app.route('/notifications/mark_all_as_read')
-    @login_required
-    def mark_all_as_read():
-        conn = sqlite3.connect('site.db')
-        c = conn.cursor()
-        c.execute('UPDATE notifications SET is_read = 1 WHERE user_id = ?', (current_user.id,))
-        conn.commit()
-        conn.close()
-        flash('Todas as notificações foram marcadas como lidas.')
-        return redirect(url_for('notifications'))
-
-    @app.route('/notifications/clear')
-    @login_required
-    def clear_notifications():
-        conn = sqlite3.connect('site.db')
-        c = conn.cursor()
-        c.execute('DELETE FROM notifications WHERE user_id = ?', (current_user.id,))
-        conn.commit()
-        conn.close()
-        flash('Todas as notificações foram removidas.')
-        return redirect(url_for('notifications'))
-
 
     @app.route('/edit/<int:os_id>', methods=['GET', 'POST'])
     @login_required
@@ -813,6 +846,11 @@ def create_app():
 
         if order[4] != current_user.id:
             flash('Você não tem permissão para editar esta OS.')
+            conn.close()
+            return redirect(url_for('view_os', os_id=os_id))
+
+        if order[6] == 'FINALIZADO':
+            flash('Você não pode editar uma OS que está finalizada.')
             conn.close()
             return redirect(url_for('view_os', os_id=os_id))
 

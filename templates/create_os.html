@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <h1 class="text-center my-4">Criar Ordem de Serviço</h1>
-  <form method="POST" enctype="multipart/form-data" class="form-horizontal mx-auto" style="max-width: 600px;">
+  <form method="POST" enctype="multipart/form-data" class="form-horizontal mx-auto" style="max-width: 800px;">
     {{ form.hidden_tag() }}
     <div class="form-group">
       <div class="field-separator">
@@ -18,64 +18,64 @@
     <div class="form-group">
       <div class="field-separator">
         <label class="form-control-label subtitle">Setores</label>
-        <div class="d-flex flex-wrap">
-          <div class="sector-card text-center m-2">
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="sector-card text-center m-2" id="rh-card">
             <img src="{{ url_for('static', filename='images/rh.png') }}" alt="RH" class="img-fluid">
             <div class="form-check">
               {{ form.rh(class="form-check-input") }}
               {{ form.rh.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="semst-card">
             <img src="{{ url_for('static', filename='images/semst.png') }}" alt="SEMST" class="img-fluid">
             <div class="form-check">
               {{ form.semst(class="form-check-input") }}
               {{ form.semst.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="comercial-card">
             <img src="{{ url_for('static', filename='images/comercial.png') }}" alt="Comercial" class="img-fluid">
             <div class="form-check">
               {{ form.comercial(class="form-check-input") }}
               {{ form.comercial.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="financeiro-card">
             <img src="{{ url_for('static', filename='images/financeiro.png') }}" alt="Financeiro" class="img-fluid">
             <div class="form-check">
               {{ form.financeiro(class="form-check-input") }}
               {{ form.financeiro.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="suprimentos-card">
             <img src="{{ url_for('static', filename='images/suprimentos.png') }}" alt="Suprimentos" class="img-fluid">
             <div class="form-check">
               {{ form.suprimentos(class="form-check-input") }}
               {{ form.suprimentos.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="operacional-card">
             <img src="{{ url_for('static', filename='images/operacional.png') }}" alt="Operacional" class="img-fluid">
             <div class="form-check">
               {{ form.operacional(class="form-check-input") }}
               {{ form.operacional.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="dp-card">
             <img src="{{ url_for('static', filename='images/dp.png') }}" alt="DP" class="img-fluid">
             <div class="form-check">
               {{ form.dp(class="form-check-input") }}
               {{ form.dp.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="recepcao-card">
             <img src="{{ url_for('static', filename='images/recepcao.png') }}" alt="Recepção" class="img-fluid">
             <div class="form-check">
               {{ form.recepcao(class="form-check-input") }}
               {{ form.recepcao.label(class="form-check-label") }}
             </div>
           </div>
-          <div class="sector-card text-center m-2">
+          <div class="sector-card text-center m-2" id="ti-card">
             <img src="{{ url_for('static', filename='images/ti.png') }}" alt="TI" class="img-fluid">
             <div class="form-check">
               {{ form.ti(class="form-check-input") }}
@@ -86,8 +86,8 @@
       </div>
     </div>
     <div class="form-group text-center">
-      <button type="submit" class="btn btn-primary">Criar OS</button>
-      <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+      <button type="submit" class="btn btn-primary custom-button">Criar OS</button>
+      <a href="{{ url_for('index') }}" class="btn btn-secondary custom-button">Cancelar</a>
     </div>
   </form>
 
@@ -106,18 +106,71 @@
       margin-bottom: 10px;
     }
     .sector-card {
-      width: 120px;
+      width: 170px;
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 5px;
       background-color: #fff;
+      cursor: pointer;
+      position: relative;
     }
     .sector-card img {
       max-width: 100%;
       height: auto;
     }
     .sector-card .form-check {
+      position: relative;
+      left:-11px;
       margin-top: 5px;
+      text-align: center;
+      
+    }
+    .form-check-input {
+      display: none;
+    }
+    .form-check-label {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      background-color: #343a40;
+      color: #ffffff;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 14px;
+    }
+    .form-check-input:checked + .form-check-label {
+      border: 2px solid #dc3545;
+      background-color: #343a40;
+    }
+    .sector-card.selected,
+    .form-check-input:checked + .form-check-label {
+      border: 2px solid #dc3545;
+      box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+    }
+    .custom-button {
+      outline: none;
+      margin-top: 15px;
+    }
+    .custom-button:focus {
+      outline: none;
+      box-shadow: none;
     }
   </style>
+
+  <script>
+    function toggleSelect(cardId) {
+      const card = document.getElementById(cardId);
+      const input = card.querySelector('.form-check-input');
+      card.classList.toggle('selected');
+      input.checked = !input.checked;
+    }
+
+    document.querySelectorAll('.form-check-input').forEach(input => {
+      input.addEventListener('change', function () {
+        const card = this.closest('.sector-card');
+        card.classList.toggle('selected', this.checked);
+      });
+    });
+  </script>
 {% endblock %}

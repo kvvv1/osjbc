@@ -25,8 +25,17 @@
         <select class="form-control" id="filter_month" name="filter_month">
             <option value="">Mês</option>
             {% for month in range(1, 13) %}
-                <option value="{{ month }}">{{ month }}</option>
+                <option value="{{ month }}">{{ '%02d' % month }}</option>
             {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mx-2">
+        <label for="filter_status" class="sr-only">Status</label>
+        <select class="form-control" id="filter_status" name="filter_status">
+            <option value="">Status</option>
+            <option value="PENDENTE">PENDENTE</option>
+            <option value="FINALIZADO">FINALIZADO</option>
+            <option value="RECUSADO">RECUSADO</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary mx-2">Filtrar</button>
@@ -39,6 +48,7 @@
             <th>Criador</th>
             <th>Data de Criação</th>
             <th>Setores</th>
+            <th>Status</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -49,6 +59,7 @@
             <td>{{ order['username'] }}</td>
             <td>{{ order['created_at'] }}</td>
             <td>{{ order['sectors'] }}</td>
+            <td>{{ order['status'] }}</td>
             <td>
                 <a href="{{ url_for('view_os', os_id=order['id']) }}" class="btn btn-secondary btn-sm">Ver Detalhes</a>
             </td>

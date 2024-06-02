@@ -35,12 +35,12 @@
                 <li class="list-group-item">
                   {{ user.username }}
                   <div>
-                    {% if user.accepted_by and not user.viewed %}
+                    {% if user.status == "RECUSADO" %}
+                      <span class="badge badge-danger">Recusado por {{ user.accepted_by }} em {{ user.accepted_at }}</span>
+                    {% elif user.accepted_by and not user.viewed %}
                       <span class="badge badge-danger">Recusado por {{ user.accepted_by }} em {{ user.accepted_at }}</span>
                     {% elif user.viewed %}
                       <span class="badge badge-success">Aceito em {{ user.accepted_at }}</span>
-                    {% elif user.status == "RECUSADO" %}
-                      <span class="badge badge-danger">RECUSADO em {{ user.accepted_at }}</span>
                     {% endif %}
                     {% if user.user_id == current_user.id and not user.viewed %}
                       <form method="POST" action="{{ url_for('accept_os', sector_id=user.sector_id) }}" style="display: inline;">
@@ -56,16 +56,27 @@
         {% endfor %}
       </ul>
       
+      <h3 class="mt-4">Observações dos Setores</h3>
+      <ul class="list-group">
+        {% for observation in observations %}
+          <li class="list-group-item">
+            <strong>{{ observation.sector }}:</strong> 
+            {{ observation.observation.replace('Recusa:', '').replace('recusa:', '').strip() }}
+            <small class="text-muted"> ({{ observation.responsible }} / {{ observation.created_at }})</small>
+            <div class="d-inline {% if 'recusa:' in observation.observation|lower %}badge badge-danger{% else %}badge badge-warning{% endif %}">
+              {% if 'recusa:' in observation.observation|lower %}RECUSADO{% else %}OBSERVAÇÃO{% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Botão para adicionar observação -->
+      <button type="button" class="btn btn-info mt-3" data-toggle="modal" data-target="#addObservationModal">Adicionar Observação</button>
+
       {% if is_creator %}
-        <h3 class="mt-4">Observações dos Setores</h3>
-        <ul class="list-group">
-          {% for observation in observations %}
-            <li class="list-group-item">
-              <strong>{{ observation.sector }}:</strong> {{ observation.observation }} <small class="text-muted"> ({{ observation.responsible }} / {{ observation.created_at }})</small>
-            </li>
-          {% endfor %}
-        </ul>
-        <a href="{{ url_for('edit_os', os_id=order['id']) }}" class="btn btn-warning mt-3">Editar</a>
+        {% if order['status'] != 'FINALIZADO' %}
+          <a href="{{ url_for('edit_os', os_id=order['id']) }}" class="btn btn-warning mt-3">Editar</a>
+        {% endif %}
         <form method="POST" action="{{ url_for('resend_os', os_id=order['id']) }}" style="display: inline;">
           <button type="submit" class="btn btn-primary mt-3">Reenviar</button>
         </form>
@@ -91,6 +102,29 @@
               <textarea class="form-control" id="observation" name="observation" maxlength="150" required></textarea>
             </div>
             <input type="hidden" name="sector_id" id="sectorInput">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Adicionar Observação -->
+  <div class="modal fade" id="addObservationModal" tabindex="-1" role="dialog" aria-labelledby="addObservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addObservationModalLabel">Adicionar Observação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addObservationForm" method="POST" action="{{ url_for('add_observation', os_id=order['id']) }}">
+            <div class="form-group">
+              <label for="observation">Observação</label>
+              <textarea class="form-control" id="observation" name="observation" maxlength="150" required></textarea>
+            </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
           </form>
         </div>

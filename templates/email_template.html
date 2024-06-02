@@ -60,6 +60,7 @@
                         <td align="center">
                             <p>Olá,</p>
                             <p>{{ message }}</p>
+                            <p><strong>Nome da OS:</strong> {{ os_name }}</p>
                             <a href="{{ host_url }}/login?next={{ url_for('view_os', os_id=os_id) }}" style="display: inline-block; padding: 15px 25px; margin: 20px 0; color: #ffffff; background-color: #dc3545; text-decoration: none; border-radius: 5px; font-weight: bold;">Visualizar OS</a>
                         </td>
                     </tr>

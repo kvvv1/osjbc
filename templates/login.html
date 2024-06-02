@@ -16,6 +16,10 @@
                 <label for="password">Senha</label>
                 {{ form.password(class="form-control", id="password", size=32) }}
             </div>
+            <div class="form-group form-check">
+                {{ form.remember_me(class="form-check-input", id="remember_me") }}
+                <label for="remember_me" class="form-check-label">Lembrar-me</label>
+            </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </div>
