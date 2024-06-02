@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 
 # Especificar o caminho do arquivo key.env
-load_dotenv('C:\\Users\\kaike\\Desktop\\SENDGRID\\sendgrid.env')
+load_dotenv('sendgrid.env')
 
 class Config:
     # Configurações básicas do Flask
