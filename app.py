@@ -238,7 +238,7 @@ def create_app():
             FROM os
             JOIN users ON os.creator_id = users.id
             LEFT JOIN sector ON os.id = sector.os_id
-            GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username
+            GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username, os.status
             ORDER BY os.created_at DESC
         ''')
         orders = c.fetchall()
@@ -779,7 +779,7 @@ def create_app():
             query += ' AND os.status = ?'
             params.append(filter_status)
 
-        query += ' GROUP BY os.id, os.name, os.created_at, users.username'
+        query += ' GROUP BY os.id, os.name, os.created_at, users.username, os.status'
 
         c.execute(query, params)
         orders = c.fetchall()
