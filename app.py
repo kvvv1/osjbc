@@ -234,14 +234,14 @@ def create_app():
         c = conn.cursor()
         c.execute('''
             SELECT os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username,
-                   os.status,
-                   GROUP_CONCAT(DISTINCT sector.name ORDER BY sector.name ASC) AS sectors
-            FROM os
-            JOIN users ON os.creator_id = users.id
-            LEFT JOIN sector ON os.id = sector.os_id
-            GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username
-            ORDER BY os.created_at DESC
-        ''')
+               os.status,
+               GROUP_CONCAT(DISTINCT sector.name) AS sectors
+        FROM os
+        JOIN users ON os.creator_id = users.id
+        LEFT JOIN sector ON os.id = sector.os_id
+        GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username, os.status
+        ORDER BY os.created_at DESC
+    ''')        
         orders = c.fetchall()
 
         # Contador de notificações não lidas
