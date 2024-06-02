@@ -234,7 +234,7 @@ def create_app():
         c.execute('''
             SELECT os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username,
                    os.status,
-                   GROUP_CONCAT(DISTINCT sector.name ORDER BY sector.name ASC) AS sectors
+                   GROUP_CONCAT(DISTINCT sector.name) AS sectors
             FROM os
             JOIN users ON os.creator_id = users.id
             LEFT JOIN sector ON os.id = sector.os_id
@@ -886,7 +886,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
-else:
-    app = create_app()
-
+    app.run(debug=True)
