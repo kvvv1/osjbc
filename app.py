@@ -154,10 +154,6 @@ def create_app():
         create_tables()
         add_column_if_not_exists()
         add_column_status_if_not_exists()
-        
-        
-        app = create_app()
-
 
     # Criar o diretório de uploads se não existir
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
@@ -888,6 +884,7 @@ def create_app():
 
     return app
 
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True)
