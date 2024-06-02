@@ -230,11 +230,9 @@ def create_app():
     def index():
         conn = sqlite3.connect('site.db')
         conn.row_factory = sqlite3.Row  # Permite acessar os resultados como dicionário
-        c = conn.cursor()
+        c = conn.cursor() 
         c.execute('''
-            SELECT os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username,
-                   os.status,
-                   GROUP_CONCAT(DISTINCT sector.name ORDER BY sector.name ASC) AS sectors
+            SELECT os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username, os.status
             FROM os
             JOIN users ON os.creator_id = users.id
             LEFT JOIN sector ON os.id = sector.os_id
