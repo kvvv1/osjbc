@@ -14,6 +14,7 @@ import sendgrid
 from sendgrid.helpers.mail import Mail, Attachment, FileContent, FileName, FileType, Disposition
 from forms import LoginForm, RegisterForm, OSForm, EditOSForm
 from celery_config import make_celery
+from config import Config
 
 def get_current_brasilia_time():
     brasilia_tz = pytz.timezone('America/Sao_Paulo')
@@ -121,15 +122,15 @@ def add_column_status_if_not_exists():
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config.Config')
+    app.config.from_object(Config)
     app.secret_key = app.config['SECRET_KEY']
     app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
     app.config['MAX_CONTENT_PATH'] = 16 * 1024 * 1024  # Limite de tamanho do arquivo para 16MB, ajuste conforme necessário
 
     # Configuração de Celery
     app.config.update(
-        CELERY_BROKER_URL='redis://localhost:6379/0',
-        CELERY_RESULT_BACKEND='redis://localhost:6379/0',
+        CELERY_BROKER_URL=app.config['CELERY_BROKER_URL'],
+        CELERY_RESULT_BACKEND=app.config['CELERY_RESULT_BACKEND'],
     )
     celery = make_celery(app)
 
@@ -230,13 +231,15 @@ def create_app():
     def index():
         conn = sqlite3.connect('site.db')
         conn.row_factory = sqlite3.Row  # Permite acessar os resultados como dicionário
-        c = conn.cursor() 
+        c = conn.cursor()
         c.execute('''
-            SELECT os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username, os.status
+            SELECT os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username,
+                   os.status,
+                   GROUP_CONCAT(DISTINCT sector.name ORDER BY sector.name ASC) AS sectors
             FROM os
             JOIN users ON os.creator_id = users.id
             LEFT JOIN sector ON os.id = sector.os_id
-            GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username, os.status
+            GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username
             ORDER BY os.created_at DESC
         ''')
         orders = c.fetchall()
@@ -777,7 +780,7 @@ def create_app():
             query += ' AND os.status = ?'
             params.append(filter_status)
 
-        query += ' GROUP BY os.id, os.name, os.created_at, users.username, os.status'
+        query += ' GROUP BY os.id, os.name, os.created_at, users.username'
 
         c.execute(query, params)
         orders = c.fetchall()
