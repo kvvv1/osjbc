@@ -1,78 +1,102 @@
-2024-05-29 13:46:03,873 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:140]
-2024-05-29 13:46:04,358 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:140]
-2024-05-29 13:58:00,187 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 14:02:19,689 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 14:02:20,545 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 14:04:49,387 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 14:11:14,656 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 14:17:01,538 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:137]
-2024-05-29 14:23:10,976 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:137]
-2024-05-29 14:28:58,268 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:137]
-2024-05-29 14:33:41,489 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:137]
-2024-05-29 15:01:58,820 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:137]
-2024-05-29 15:18:13,148 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 15:24:10,316 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 15:40:40,533 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 15:40:41,044 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-29 15:47:56,435 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:12:02,202 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:12:02,624 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:13:16,145 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:14:26,150 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:16:43,491 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:21:21,776 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:130]
-2024-05-29 16:22:26,535 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 13:26:54,151 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 13:26:54,845 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 13:34:49,078 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 13:35:01,823 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 14:49:04,631 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:119]
-2024-05-30 15:07:56,394 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 15:10:38,783 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:129]
-2024-05-30 15:51:39,170 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:135]
-2024-05-30 17:05:09,445 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 17:25:39,585 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 17:31:41,954 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 17:31:42,402 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 20:32:18,041 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 20:32:18,516 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 20:48:42,539 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 21:23:01,824 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 21:23:02,508 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 21:24:57,756 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 21:24:58,255 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 22:34:04,101 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 22:40:23,941 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-30 22:40:24,551 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 14:02:25,293 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 14:02:25,918 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 15:25:47,419 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 15:25:48,193 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 22:22:34,451 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-05-31 22:39:33,591 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-05-31 22:42:10,279 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 23:40:54,456 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-05-31 23:47:57,882 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 09:45:36,419 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 10:01:14,948 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 10:05:45,218 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 10:05:52,608 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 10:06:01,062 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 10:06:14,270 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:149]
-2024-06-01 11:43:19,587 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-01 13:21:22,456 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-01 13:29:23,332 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-01 13:35:59,974 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-01 13:41:25,670 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-01 13:54:37,640 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 09:37:54,234 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 09:50:12,515 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 09:58:44,503 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 10:13:59,921 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 11:05:08,233 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 12:09:45,586 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 12:23:18,053 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 12:24:03,626 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 13:38:45,540 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 13:38:46,034 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
-2024-06-02 13:39:11,235 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:150]
+2024-06-02 23:28:14,541 ERROR: Exception on /notifications [GET] [in C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\app.py", line 725, in notifications
+    c.execute('SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC', (current_user.id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(
+           ^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\templates\notifications.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\templates\base.html", line 115, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\templates\notifications.html", line 8, in block 'content'
+    <a href="{{ url_for('clear_notifications') }}" class="btn btn-danger btn-sm">Limpar notificações</a>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\helpers.py", line 338, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\helpers.py", line 325, in url_for
+    rv = url_adapter.build(
+         ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\werkzeug\routing.py", line 2305, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'clear_notifications'. Did you mean 'notifications' instead?
+2024-06-02 23:28:33,215 ERROR: Exception on /notifications [GET] [in C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\app.py", line 725, in notifications
+    c.execute('SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC', (current_user.id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(
+           ^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\templates\notifications.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\templates\base.html", line 115, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\kaike\Desktop\PROGRAMA - OS\templates\notifications.html", line 8, in block 'content'
+    <a href="{{ url_for('clear_notifications') }}" class="btn btn-danger btn-sm">Limpar notificações</a>
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\helpers.py", line 338, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\flask\helpers.py", line 325, in url_for
+    rv = url_adapter.build(
+         ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kaike\Desktop\PROGRAMA - OS\venv\Lib\site-packages\werkzeug\routing.py", line 2305, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'clear_notifications'. Did you mean 'notifications' instead?
+2024-06-02 23:34:49,140 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:161]
+2024-06-03 00:05:35,969 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:161]
+2024-06-03 00:13:55,049 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:161]
+2024-06-03 00:20:51,505 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:161]
+2024-06-03 13:12:29,726 INFO: Iniciando a aplicação [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:161]
+2024-06-03 13:13:16,140 ERROR: Erro ao carregar notificações: Could not build url for endpoint 'clear_notifications'. Did you mean 'notifications' instead? [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:729]
+2024-06-03 13:14:24,373 ERROR: Erro ao carregar notificações: Could not build url for endpoint 'clear_notifications'. Did you mean 'notifications' instead? [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:729]
+2024-06-03 13:23:18,488 ERROR: Erro ao carregar notificações: Could not build url for endpoint 'clear_notifications'. Did you mean 'notifications' instead? [in c:\Users\kaike\Desktop\PROGRAMA - OS\app.py:729]

@@ -47,6 +47,16 @@ def create_tables():
         )
     ''')
     c.execute('''
+        CREATE TABLE IF NOT EXISTS os_versions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            os_id INTEGER,
+            file_path TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            version_number INTEGER NOT NULL,
+            FOREIGN KEY(os_id) REFERENCES os(id)
+        )
+    ''')
+    c.execute('''
         CREATE TABLE IF NOT EXISTS sector (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -239,6 +249,7 @@ def create_app():
         FROM os
         JOIN users ON os.creator_id = users.id
         LEFT JOIN sector ON os.id = sector.os_id
+        WHERE os.status = 'PENDENTE'
         GROUP BY os.id, os.file_path, os.created_at, os.name, os.creator_id, users.username, os.status
         ORDER BY os.created_at DESC
     ''')        
@@ -325,6 +336,12 @@ def create_app():
                     VALUES (?, ?, ?, ?)
                 ''', (relative_file_path, created_at, form.name.data, current_user.id))
                 os_id = c.lastrowid
+
+                # Criar a primeira versão
+                c.execute('''
+                    INSERT INTO os_versions (os_id, file_path, created_at, version_number)
+                    VALUES (?, ?, ?, ?)
+                ''', (os_id, relative_file_path, created_at, 1))
                 conn.commit()
 
                 sectors = []
@@ -387,6 +404,9 @@ def create_app():
             flash('Ordem de serviço não encontrada.')
             return redirect(url_for('index'))
 
+        c.execute('SELECT * FROM os_versions WHERE os_id = ? ORDER BY version_number', (os_id,))
+        versions = c.fetchall()
+
         c.execute('SELECT DISTINCT name FROM sector WHERE os_id = ?', (os_id,))
         sectors = c.fetchall()
 
@@ -412,7 +432,7 @@ def create_app():
 
         conn.close()
 
-        return render_template('view_os.html', order=dict(order), sectors=sector_data, creator=dict(creator), observations=[dict(observation) for observation in observations], is_creator=current_user.id == order['creator_id'])
+        return render_template('view_os.html', order=dict(order), versions=versions, sectors=sector_data, creator=dict(creator), observations=[dict(observation) for observation in observations], is_creator=current_user.id == order['creator_id'])
 
     @app.route('/uploads/<path:filename>')
     @login_required
@@ -698,12 +718,17 @@ def create_app():
     @app.route('/notifications')
     @login_required
     def notifications():
-        conn = sqlite3.connect('site.db')
-        c = conn.cursor()
-        c.execute('SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC', (current_user.id,))
-        notifications = c.fetchall()
-        conn.close()
-        return render_template('notifications.html', notifications=notifications)
+        try:
+            conn = sqlite3.connect('site.db')
+            c = conn.cursor()
+            c.execute('SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC', (current_user.id,))
+            notifications = c.fetchall()
+            conn.close()
+            return render_template('notifications.html', notifications=notifications)
+        except Exception as e:
+            app.logger.error(f"Erro ao carregar notificações: {e}")
+            flash('Ocorreu um erro ao carregar as notificações.')
+            return redirect(url_for('index'))
 
     @app.route('/notifications/mark_as_read/<int:notification_id>')
     @login_required
@@ -714,6 +739,28 @@ def create_app():
         conn.commit()
         conn.close()
         return redirect(url_for('notifications'))
+    
+    @app.route('/notifications/mark_all_as_read')
+    @login_required
+    def mark_all_as_read():
+        conn = sqlite3.connect('site.db')
+        c = conn.cursor()
+        c.execute('UPDATE notifications SET is_read = 1 WHERE user_id = ?', (current_user.id,))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('notifications'))
+
+    @app.route('/notifications/clear')
+    @login_required
+    def clear_notifications():
+        conn = sqlite3.connect('site.db')
+        c = conn.cursor()
+        c.execute('DELETE FROM notifications WHERE user_id = ?', (current_user.id,))
+        conn.commit()
+        conn.close()
+        flash('Notificações limpas com sucesso.')
+        return redirect(url_for('notifications'))
+
 
     @app.route('/accept/<int:sector_id>', methods=['POST'])
     @login_required
@@ -867,7 +914,16 @@ def create_app():
                 form.file.data.save(file_path)
 
                 relative_file_path = filename  # Salvamos apenas o nome do arquivo
-                c.execute('UPDATE os SET file_path = ? WHERE id = ?', (relative_file_path, os_id))
+                created_at = get_current_brasilia_time()
+
+                # Criar nova versão
+                c.execute('SELECT COUNT(*) FROM os_versions WHERE os_id = ?', (os_id,))
+                version_count = c.fetchone()[0] + 1
+                c.execute('''
+                    INSERT INTO os_versions (os_id, file_path, created_at, version_number)
+                    VALUES (?, ?, ?, ?)
+                ''', (os_id, relative_file_path, created_at, version_count))
+                conn.commit()
 
             conn.commit()
             conn.close()
